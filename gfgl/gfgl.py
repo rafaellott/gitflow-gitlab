@@ -5,14 +5,16 @@ from .hotfix import hotfix as hotfix_cmd
 from .bugfix import bugfix as bugfix_cmd
 from .support import support as support_cmd
 from .release import release as release_cmd
+from git import Repo
 import configparser
 import click
 import os
 
 
 @click.group()
-def gfgl():
-    pass
+@click.pass_context
+def gfgl(ctx):
+    ctx.obj = Repo(GIT_ROOT_DIR)
 
 
 @click.command()
