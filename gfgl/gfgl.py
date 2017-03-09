@@ -20,26 +20,12 @@ def gfgl(ctx):
 @click.command()
 def init():
     """Initialize a new git repo with support for the branching model."""
-    # check_ini_file()
     conf_file = open(os.path.join(GIT_ROOT_DIR, '.git', 'gfgl.ini'), 'w')
     GFGL_CONFIG = configparser.ConfigParser()
     ask_branch(GFGL_CONFIG)
     click.echo()
     ask_feature(GFGL_CONFIG)
     GFGL_CONFIG.write(conf_file)
-    print('Your value is', GFGL_CONFIG)
-
-
-def check_ini_file():
-    # Check if current .git folder contains the gfgl configuration file
-    if os.path.exists(os.path.join(GIT_ROOT_DIR, '.git', 'gfgl.ini')):
-        # Loads configurations
-        return True
-    else:
-        # Raise an exception and inform how to start gfgl
-        raise Exception(
-            "GitFlowGitLab not initialize. Run 'gfgl init' to start."
-        )
 
 
 def ask_branch(GFGL_CONFIG):

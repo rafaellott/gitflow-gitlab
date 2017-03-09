@@ -1,4 +1,5 @@
-from .utils import load_config
+from . import GFGL_CONFIG
+from .utils import check_before_commands
 import click
 
 
@@ -6,16 +7,16 @@ import click
 @click.pass_context
 def feature(ctx):
     """Manage your feature branches."""
-    pass
+    check_before_commands()
+    raise click.exceptions.ClickException("A GOOD EXCEPTION")
 
 
 @click.command()
 @click.argument('name')
 @click.pass_context
 def start(ctx, name):
-    config = load_config()
-    develop_branch = config['branch']['develop']
-    feature_branch = config['prefix']['feature'] + name
+    develop_branch = GFGL_CONFIG['branch']['develop']
+    feature_branch = GFGL_CONFIG['prefix']['feature'] + name
 
     # Comandos
     git = ctx.obj.git
